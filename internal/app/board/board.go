@@ -58,27 +58,23 @@ func (b *Board) DrawWorld() {
 }
 
 func (b *Board) CanContinue() bool {
-	hasGrass, hasHerbivore, predator := false, false, false
+	hasHerbivore, hasPredator := false, false
 
 	for _, e := range b.Entities {
-		if e.Object() == "grass" {
-			hasGrass = true
-		}
-
 		if e.Object() == "herbivore" {
 			hasHerbivore = true
 		}
 
 		if e.Object() == "predator" {
-			predator = true
+			hasPredator = true
+		}
+
+		if hasHerbivore && hasPredator {
+			return true
 		}
 	}
 
-	if hasHerbivore && predator {
-		return true
-	}
-
-	return hasGrass && hasHerbivore
+	return false
 }
 
 func (b *Board) RemoveEntity(c coordinate.Coordinate) {
