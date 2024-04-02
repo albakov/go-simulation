@@ -36,12 +36,7 @@ func (pf *PathFinder) Handle() {
 		from := pf.q[0]
 		pf.q = slices.Delete(pf.q, 0, 1)
 
-		// if entity died of starvation, remove it
-		if pf.entity.GetStepsHungry() >= pf.entity.GetMaxStepsHungryBeforeDie() {
-			pf.board.RemoveEntity(pf.entity.Coordinates())
-			pf.board.DrawWorld()
-			pf.entity = nil
-
+		if pf.isDiedOfStarvation() {
 			break
 		}
 
@@ -52,8 +47,17 @@ func (pf *PathFinder) Handle() {
 			break
 		}
 
+		availableMoves := pf.availableMoves(from)
+
+		// if entity stands still, increment starvation
+		if len(availableMoves) == 0 {
+			pf.entity.IncrementStepsHungry()
+
+			continue
+		}
+
 		// move to empty cell
-		for _, to := range pf.availableMoves(from) {
+		for _, to := range availableMoves {
 			if _, ok := pf.visited[to]; !ok {
 				pf.visited[to] = struct{}{}
 				pf.q = append(pf.q, to)
@@ -165,4 +169,20 @@ func (pf *PathFinder) move(from, to coordinate.Coordinate) {
 	pf.board.RemoveEntity(from)
 	pf.board.AddEntity(to, pf.entity)
 	pf.board.DrawWorld()
+}
+
+func (pf *PathFinder) isDiedOfStarvation() bool {
+	if pf.entity.GetStepsHungry() >= pf.entity.GetMaxStepsHungryBeforeDie() {
+		pf.entity.DecreaseHp(1)
+	}
+
+	if pf.entity.GetHp() <= 0 {
+		pf.board.RemoveEntity(pf.entity.Coordinates())
+		pf.board.DrawWorld()
+		pf.entity = nil
+
+		return true
+	}
+
+	return false
 }
