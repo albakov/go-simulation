@@ -15,7 +15,7 @@ const (
 
 	MessagePrefix    = "-> "
 	MessageBorder    = "===="
-	MessageEmptyCell = " .. "
+	MessageEmptyCell = "⬛"
 	MessageNewLine   = "\n"
 )
 

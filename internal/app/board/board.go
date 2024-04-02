@@ -39,9 +39,9 @@ func (b *Board) DrawWorld() {
 	for row := 0; row < b.Rows; row++ {
 		for column := 0; column < b.Columns; column++ {
 			if item, ok := b.entity(row, column); ok {
-				item.ShowSign()
+				util.ShowMessage(" %s ", item.GetSign())
 			} else {
-				util.ShowMessage(util.MessageEmptyCell)
+				util.ShowMessage(" %s ", util.MessageEmptyCell)
 			}
 		}
 

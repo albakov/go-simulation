@@ -2,11 +2,10 @@ package entity
 
 import (
 	"github.com/albakov/go-simulation/internal/entity/coordinate"
-	"github.com/albakov/go-simulation/internal/util"
 )
 
 type IEntity interface {
-	ShowSign()
+	GetSign() string
 	MakeMove(to coordinate.Coordinate)
 	Object() string
 
@@ -36,8 +35,8 @@ func New(coordinate coordinate.Coordinate) *Entity {
 	return &Entity{Coordinate: coordinate, Sign: " .. "}
 }
 
-func (e *Entity) ShowSign() {
-	util.ShowMessage(e.Sign)
+func (e *Entity) GetSign() string {
+	return e.Sign
 }
 
 func (e *Entity) MakeMove(coordinate.Coordinate) {

@@ -8,7 +8,7 @@ herbivore_speed = 1
 herbivore_hp = 1
 herbivore_max_steps_hungry_before_die = 5
 herbivore_nutrition_value = 1
-herbivore_sign = " 🦙 "
+herbivore_sign = "🦙"
 herbivore_spawn_rate = 0.3
 
 # predator
@@ -16,18 +16,18 @@ predator_speed = 2
 predator_hp = 1
 predator_max_steps_hungry_before_die = 5
 predator_attack_power = 1
-predator_sign = " 🦁️ "
+predator_sign = "🐯"
 predator_spawn_rate = 0.1
 
 # grass
-grass_sign = " ☘️ "
+grass_sign = "🌿"
 grass_nutrition_value = 1
 grass_spawn_rate = 0.3
 
 # rock
-rock_sign = " 🪨 "
+rock_sign = "🪨"
 rock_spawn_rate = 0.1
 
 # tree
-tree_sign = " 🌳 "
+tree_sign = "🌳"
 tree_spawn_rate = 0.1
